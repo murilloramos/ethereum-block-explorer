@@ -35,8 +35,19 @@
         <div id="txs" class="box"></div>
 
     <script>
-        const API_KEY = "";
-        const BASE_URL = "";
+        async function loadLatestBlock() {
+            try {
+                const response = await fetch(`/latest-block`);
+                const data = await response.json();
+
+                document.getElementById("block").innerHTML =
+                    "<prep>" + JSON.stringify(data, null, 2) + "</prep>";
+            } catch (err) {
+                console.error(err);
+                document.getElementById("block").innerText =
+                "Error loading latest block";
+            }
+        }
     </script>
     </body>
 </html>
